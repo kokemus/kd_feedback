@@ -1,8 +1,22 @@
 import 'dart:convert';
 
 class FeedbackModel {
+  /// Five point scale statisfaction level:
+  /// 
+  /// 1 'Very dissatisfied'
+  /// 2 'Somewhat dissatisfied'
+  /// 3 'Neither satisfied or dissatisfied'
+  /// 4 'Somewhat satisfied'
+  /// 5 'Very satisfied'
   int satisfaction;
+  /// Four types
+  /// 
+  /// 1 'I found a bug'
+  /// 2 'I have a feature request'
+  /// 3 'I have a problem'
+  /// 4 'I like' 
   int type;
+  /// Free text description
   String description;
 
   FeedbackModel({this.satisfaction, this.type, this.description});

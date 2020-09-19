@@ -101,7 +101,9 @@ class FeedbackFormState extends State<FeedbackForm> {
                     _state = SubmitButtonState.success;
                     _autoValidate = false;                    
                   });
-                  widget.onSubmitted();
+                  if (widget.onSubmitted != null) {
+                    widget.onSubmitted();
+                  }
                 } catch (e) {
                   print(e);
                   setState(() {
@@ -115,7 +117,9 @@ class FeedbackFormState extends State<FeedbackForm> {
               }
             } else {
               _fromKey.currentState.reset();
-              widget.onReset();
+              if (widget.onReset != null) {
+                widget.onReset();
+              }
             }
           }
         )
