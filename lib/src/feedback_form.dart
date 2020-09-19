@@ -117,6 +117,7 @@ class FeedbackFormState extends State<FeedbackForm> {
               }
             } else {
               _fromKey.currentState.reset();
+              _feedback = FeedbackModel();
               if (widget.onReset != null) {
                 widget.onReset();
               }
