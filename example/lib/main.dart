@@ -14,8 +14,7 @@ class App extends StatelessWidget {
       title: 'Feedback Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        brightness: Brightness.light,
       ),
       home: Feedback(),
     );
@@ -48,10 +47,11 @@ class Feedback extends StatelessWidget {
           },
         )
       ),
-      floatingActionButton: FeedbackFloatingActionButton(onSubmit: (feedback) async { 
+      floatingActionButton: Theme(data: ThemeData.dark(),
+      child: FeedbackFloatingActionButton(onSubmit: (feedback) async { 
         print(feedback);
         await _sendFeedback(feedback);
-       },),
+       },),),
     );
   }
 

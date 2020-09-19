@@ -45,16 +45,24 @@ class SubmitButton extends StatelessWidget {
         break;
       case SubmitButtonState.submitting:
         child = RaisedButton(
-          disabledColor: Theme.of(context).accentColor,
-          child: CircularProgressIndicator(backgroundColor: Colors.white,), 
+          disabledColor: Colors.grey,
+          child: Container(
+            width: 24,
+            height: 24,
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.white, 
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
+              strokeWidth: 2,
+            ),
+          ), 
           onPressed: null
         );
         break; 
       case SubmitButtonState.initial:     
       default:
         child = RaisedButton(
-          color: color ?? Theme.of(context).accentColor,
-          textColor: textColor ?? Colors.white,
+          color: Theme.of(context).accentColor,
+          textColor: Theme.of(context).accentTextTheme.button.color,
           child: CapsText(label), 
           onPressed: onPressed
         );

@@ -34,6 +34,7 @@ class SatisfactionRating extends StatelessWidget {
         ToggleButtons(
           borderWidth: 16.0,
           color: color,
+          selectedColor: Theme.of(context).accentColor,
           borderColor: Colors.transparent,
           selectedBorderColor: Colors.transparent,              
           children: [
