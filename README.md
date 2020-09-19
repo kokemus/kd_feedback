@@ -41,7 +41,7 @@ FeedbackIconButton(
 
 ### Screenshots
 
-![Full form light theme](https://github.com/kokemus/kd_feedback/blob/master/full_form_light.png?raw=true)
-![First page form dark theme](https://github.com/kokemus/kd_feedback/blob/master/first_form_dark.png?raw=true)
-![Second page form dark theme](https://github.com/kokemus/kd_feedback/blob/master/second_form_dark.png?raw=true)
-![Third page form dark theme](https://github.com/kokemus/kd_feedback/blob/master/third_form_dark.png?raw=true)
+![Full form light theme](https://github.com/kokemus/kd_feedback/blob/master/screenshots/full_form_light.png?raw=true)
+![First page form dark theme](https://github.com/kokemus/kd_feedback/blob/master/screenshots/first_form_dark.png?raw=true)
+![Second page form dark theme](https://github.com/kokemus/kd_feedback/blob/master/screenshots/second_form_dark.png?raw=true)
+![Third page form dark theme](https://github.com/kokemus/kd_feedback/blob/master/screenshots/third_form_dark.png?raw=true)
