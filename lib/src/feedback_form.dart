@@ -165,9 +165,9 @@ class FeedbackFormState extends State<FeedbackForm> {
         Text('Can we help you somehow?',
           style: Theme.of(context).textTheme.headline5,
         ),
-        FormField<int>(
+        FormField<FeedbackType>(
           builder: (field) {
-            return FeedbackType(
+            return FeedbackTypeSelect(
               type: field.value,
               color: _validateType(_feedback.type) != null && _autoValidate != AutovalidateMode.disabled
                   ? Colors.red : null, 
@@ -222,10 +222,8 @@ class FeedbackFormState extends State<FeedbackForm> {
     return '';
   }
 
-  String _validateType(int value) {
-    if (_feedback.type != null 
-      && _feedback.type >= 1 
-      && _feedback.type <= 4) {
+  String _validateType(FeedbackType value) {
+    if (_feedback.type != null) {
       return null;
     }
     return '';

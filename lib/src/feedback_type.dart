@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
-class FeedbackType extends StatelessWidget {
-  final Function(int) onSelected;
-  final Color color;
-  final int type;
+enum FeedbackType {
+  Bug,
+  FeatureRequest,
+  Problem,
+  Like
+}
 
-  FeedbackType({this.type, this.onSelected, this.color});
+class FeedbackTypeSelect extends StatelessWidget {
+  final Function(FeedbackType) onSelected;
+  final Color color;
+  final FeedbackType type;
+
+  FeedbackTypeSelect({this.type, this.onSelected, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -14,25 +21,25 @@ class FeedbackType extends StatelessWidget {
         RadioListTile(
           title: Text('I found a bug', style: TextStyle(color: color),),
           groupValue: type,
-          value: 1, 
+          value: FeedbackType.Bug, 
           onChanged: _onChanged,
         ),
         RadioListTile(
           title: Text('I have a feature request', style: TextStyle(color: color),),
           groupValue: type,
-          value: 2, 
+          value: FeedbackType.FeatureRequest, 
           onChanged: _onChanged,
         ),
         RadioListTile(
           title: Text('I have a problem', style: TextStyle(color: color),),
           groupValue: type,
-          value: 3, 
+          value: FeedbackType.Problem, 
           onChanged: _onChanged,
         ),
         RadioListTile(
           title: Text('I like', style: TextStyle(color: color),),
           groupValue: type,
-          value: 4, 
+          value: FeedbackType.Like, 
           onChanged: _onChanged,
         ) 
       ]

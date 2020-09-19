@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'feedback_type.dart';
+
 class FeedbackModel {
   /// Five point scale statisfaction level:
   /// 
@@ -11,11 +13,11 @@ class FeedbackModel {
   int satisfaction;
   /// Four types
   /// 
-  /// 1 'I found a bug'
-  /// 2 'I have a feature request'
-  /// 3 'I have a problem'
-  /// 4 'I like' 
-  int type;
+  /// 'I found a bug'
+  /// 'I have a feature request'
+  /// 'I have a problem'
+  /// 'I like' 
+  FeedbackType type;
   /// Free text description
   String description;
 
@@ -30,7 +32,7 @@ class FeedbackModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['satisfaction'] = this.satisfaction;
-    data['type'] = this.type;
+    data['type'] = this.type.index;
     data['description'] = this.description;
     return data;
   }
