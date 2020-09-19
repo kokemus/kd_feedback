@@ -24,7 +24,7 @@ class FeedbackForm extends StatefulWidget {
 class FeedbackFormState extends State<FeedbackForm> {
   final _fromKey = GlobalKey<FormState>();
   final _controller = PageController();
-  var _autoValidate = false;
+  var _autoValidate = AutovalidateMode.disabled;
   FeedbackModel _feedback = FeedbackModel();
   var _state = SubmitButtonState.initial;
 
@@ -32,7 +32,7 @@ class FeedbackFormState extends State<FeedbackForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _fromKey,
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidate,
       onChanged: () {
         setState(() {
           _state = SubmitButtonState.initial;
@@ -99,7 +99,7 @@ class FeedbackFormState extends State<FeedbackForm> {
                   await widget.onSubmit(_feedback);           
                   setState(() {
                     _state = SubmitButtonState.success;
-                    _autoValidate = false;                    
+                    _autoValidate = AutovalidateMode.disabled;                    
                   });
                   if (widget.onSubmitted != null) {
                     widget.onSubmitted();
@@ -112,7 +112,7 @@ class FeedbackFormState extends State<FeedbackForm> {
                 } 
               } else {
                 setState(() {
-                  _autoValidate = true;
+                  _autoValidate = AutovalidateMode.always;
                 });
               }
             } else {
@@ -139,7 +139,7 @@ class FeedbackFormState extends State<FeedbackForm> {
             builder: (field) {
               return SatisfactionRating(
                 rate: field.value,
-                color: _validateSatisfaction(_feedback.satisfaction) != null && _autoValidate
+                color: _validateSatisfaction(_feedback.satisfaction) != null && _autoValidate != AutovalidateMode.disabled
                   ? Colors.red : null, 
                 onSelected: (rate) {
                   setState(() {
@@ -168,7 +168,7 @@ class FeedbackFormState extends State<FeedbackForm> {
           builder: (field) {
             return FeedbackType(
               type: field.value,
-              color: _validateType(_feedback.type) != null && _autoValidate
+              color: _validateType(_feedback.type) != null && _autoValidate != AutovalidateMode.disabled
                   ? Colors.red : null, 
               onSelected: (type) {
                 setState(() {
