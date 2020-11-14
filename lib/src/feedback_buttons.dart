@@ -1,30 +1,39 @@
 import 'package:flutter/material.dart';
 
 import 'feedback_form.dart';
+import 'feedback_localizations.dart';
 import 'feedback_model.dart';
 
 class FeedbackIconButton extends StatelessWidget {
   final Future Function(FeedbackModel) onSubmit;
+  final FeedbackLocalizations localizations;
 
-  FeedbackIconButton({@required this.onSubmit});
+  FeedbackIconButton({
+    @required this.onSubmit, 
+    this.localizations    
+  });
 
   @override
   Widget build(BuildContext context) {
     return IconButton(icon: Icon(Icons.feedback), onPressed: () {
-      showFeedbackBottomSheet(context: context, onSubmit: onSubmit);
+      showFeedbackBottomSheet(context: context, onSubmit: onSubmit, localizations: localizations);
     });
   }
 }
 
 class FeedbackFloatingActionButton extends StatelessWidget {
   final Future Function(FeedbackModel) onSubmit;
+  final FeedbackLocalizations localizations;
 
-  FeedbackFloatingActionButton({@required this.onSubmit});
+  FeedbackFloatingActionButton({
+    @required this.onSubmit, 
+    this.localizations
+  });
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(child: Icon(Icons.feedback), onPressed: () {
-      showFeedbackBottomSheet(context: context, onSubmit: onSubmit);
+      showFeedbackBottomSheet(context: context, onSubmit: onSubmit, localizations: localizations);
     });
   }
 }
@@ -32,6 +41,7 @@ class FeedbackFloatingActionButton extends StatelessWidget {
 Future<T> showFeedbackBottomSheet<T>({
   @required BuildContext context,
   @required Future Function(FeedbackModel) onSubmit,
+  FeedbackLocalizations localizations
 }) {
   assert(context != null);
   return showModalBottomSheet(
@@ -47,7 +57,8 @@ Future<T> showFeedbackBottomSheet<T>({
               Navigator.of(context).pop(); 
             });
           },
-          paged: true
+          paged: true,
+          localizations: localizations,
         ),
       ),
     )

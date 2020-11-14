@@ -30,17 +30,23 @@ class Feedback extends StatelessWidget {
         centerTitle: true,  
         title: Text('Feedback Demo'),
         actions: <Widget>[
-          FeedbackIconButton(onSubmit: (feedback) { 
-            print(feedback);
-            return Future.delayed(Duration(seconds: 2), () {
-              throw HttpException("Server error");
-            });
-          },),
+          FeedbackIconButton(
+            localizations: FinnishFeedbackLocalization(), 
+            onSubmit: (feedback) { 
+              print(feedback);
+              return Future.delayed(Duration(seconds: 2), () {
+                throw HttpException("Server error");
+              });
+            },
+          ),
         ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: FeedbackForm(
+          localizations: DefaultFeedbackLocalizations(
+            satisfactionQuestionText: 'Ha statisfied are you with da application?'
+          ),
           onSubmit: (feedback) async {
             print(feedback);
             await _sendFeedback(feedback);
@@ -60,4 +66,44 @@ class Feedback extends StatelessWidget {
       return null;
     });
   }
+}
+
+class FinnishFeedbackLocalization extends FeedbackLocalizations {
+  @override
+  String get feedbackDescriptionHintLabel => 'Kuvaus';
+
+  @override
+  String get feedbackDescriptionRequestText => 'Kerro tarkemmin';
+
+  @override
+  String get feedbackTypeQuestionText => 'Voimmeko auttaa jotenkin?';
+
+  @override
+  List<String> get feedbackTypeTexts => [
+    'Löysin virheen',
+    'Minulla on ominaisuuspyyntö',
+    'Minulla on ongelma',
+    'Minä pidän'
+  ];
+
+  @override
+  List<String> get satisfactionLevelTexts => [
+    'Erittäin tyytymätön',
+    'Jossain määrin tyytymätön',
+    'Ei tyytyväinen eikä tyytymätön',
+    'Jossain määrin tyytyväinen',
+    'Erittäin tyytyväinen'
+  ];
+
+  @override
+  String get satisfactionQuestionText => 'Kuinka tyytyväinen olet sovellukseen?';
+
+  @override
+  String get submitButtonErrorLabel => 'Yritä uudelleen';
+
+  @override
+  String get submitButtonLabel => 'Lähetä';
+
+  @override
+  String get submitButtonSuccessLabel => 'Kiitos palautteestasi';  
 }

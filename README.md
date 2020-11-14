@@ -20,6 +20,9 @@ import 'package:kd_feedback/kd_feedback.dart';
 body: SingleChildScrollView(
     padding: const EdgeInsets.all(16.0),
     child: FeedbackForm(
+        localizations: DefaultFeedbackLocalizations(
+            satisfactionQuestionText: 'Ha statisfied are you with da application?'
+        ),
         onSubmit: (feedback) async {
             await _sendFeedback(feedback);
         },
@@ -33,10 +36,15 @@ floatingActionButton: FeedbackFloatingActionButton(
 )
 
 FeedbackIconButton(
+    localizations: FinnishFeedbackLocalization(),
     onSubmit: (feedback) async {
         await _sendFeedback(feedback);
     },
 )
+
+class FinnishFeedbackLocalization extends FeedbackLocalizations {
+    ...
+}
 ```
 
 ### Screenshots

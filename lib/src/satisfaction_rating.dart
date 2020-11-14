@@ -1,26 +1,21 @@
 import 'package:flutter/material.dart';
 
+import 'feedback_localizations.dart';
+
 class SatisfactionRating extends StatelessWidget {
   final Function(int) onSelected;
   final Color color;
   final int rate;
+  @required final FeedbackLocalizations localizations;
   
-  SatisfactionRating({this.rate, this.onSelected, this.color});
-  
-  static const _satisfactionDescriptions = [
-    'Very dissatisfied', 
-    'Somewhat dissatisfied', 
-    'Neither satisfied or dissatisfied',
-    'Somewhat satisfied', 
-    'Very satisfied'
-  ];
+  SatisfactionRating({this.rate, this.onSelected, this.color, this.localizations});
 
   @override
   Widget build(BuildContext context) {
     var satisfactionDescription = '';
     var isSelected = [false, false, false, false, false];
     if (rate != null) {
-      satisfactionDescription = _satisfactionDescriptions[rate - 1];
+      satisfactionDescription = localizations.satisfactionLevelTexts[rate - 1];
       for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
         if (buttonIndex == rate - 1) {
           isSelected[buttonIndex] = true;

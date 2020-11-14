@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'feedback_localizations.dart';
 import 'submit_button.dart';
 import 'feedback_type.dart';
 import 'satisfaction_rating.dart';
@@ -8,14 +9,16 @@ class FeedbackForm extends StatefulWidget {
   final paged;
   final Future Function(FeedbackModel) onSubmit;
   final VoidCallback onSubmitted;
-  final VoidCallback onReset;  
+  final VoidCallback onReset;
+  final FeedbackLocalizations localizations;
 
   FeedbackForm({
     @required this.onSubmit,
     this.onSubmitted,
     this.onReset,
     this.paged = false, 
-  });
+    FeedbackLocalizations localizations, 
+  }) : localizations = localizations ?? DefaultFeedbackLocalizations();
 
   @override
   State<StatefulWidget> createState() => FeedbackFormState();
@@ -87,8 +90,8 @@ class FeedbackFormState extends State<FeedbackForm> {
         child: SubmitButton(
           state: _state,
           label: _state == SubmitButtonState.success 
-            ? 'thank you' : _state == SubmitButtonState.error 
-              ? 'try again' : 'submit', 
+            ? widget.localizations.submitButtonSuccessLabel : _state == SubmitButtonState.error 
+              ? widget.localizations.submitButtonErrorLabel : widget.localizations.submitButtonLabel, 
           onPressed: () async {
             if (_state != SubmitButtonState.success) {
               if (_fromKey.currentState.validate()) {  
@@ -132,7 +135,7 @@ class FeedbackFormState extends State<FeedbackForm> {
       crossAxisAlignment: CrossAxisAlignment.start, 
       children: <Widget>[
         Text(
-          'How statisfied are you with the application?',
+          widget.localizations.satisfactionQuestionText,
           style: Theme.of(context).textTheme.headline5,
         ),
         Align(child: 
@@ -149,6 +152,7 @@ class FeedbackFormState extends State<FeedbackForm> {
                   field.didChange(rate);
                   if (onSelected != null) onSelected(rate);
                 },
+                localizations: widget.localizations,
               );
             },
             validator: _validateSatisfaction
@@ -162,12 +166,13 @@ class FeedbackFormState extends State<FeedbackForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start, 
       children: <Widget>[
-        Text('Can we help you somehow?',
+        Text(widget.localizations.feedbackTypeQuestionText,
           style: Theme.of(context).textTheme.headline5,
         ),
         FormField<FeedbackType>(
           builder: (field) {
             return FeedbackTypeSelect(
+              localizations: widget.localizations,
               type: field.value,
               color: _validateType(_feedback.type) != null && _autoValidate != AutovalidateMode.disabled
                   ? Colors.red : null, 
@@ -190,13 +195,13 @@ class FeedbackFormState extends State<FeedbackForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start, 
       children: <Widget>[
-        Text('Please give us some details',
+        Text(widget.localizations.feedbackDescriptionRequestText,
           style: Theme.of(context).textTheme.headline5,),
         SizedBox(height: 16,),
         TextFormField(
           decoration: InputDecoration(
             border: OutlineInputBorder(), 
-            hintText: 'Description',
+            hintText: widget.localizations.feedbackDescriptionHintLabel,
             helperText: ''
           ),
           textInputAction: TextInputAction.done,
